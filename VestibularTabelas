@@ -1,0 +1,62 @@
+CREATE DATABASE vestibular;
+USE vestibular;
+
+CREATE TABLE usuario(
+id_usuario INT primary key auto_increment,
+nome_usu VARCHAR(80) NOT NULL,
+email_usu VARCHAR(50) NOT NULL,
+data_cadastro DATE
+);
+
+CREATE TABLE disciplina(
+id_disciplina INT PRIMARY KEY AUTO_INCREMENT,
+nome_dis VARCHAR (80) NOT NULL
+);
+
+CREATE TABLE assunto(
+id_assunto INT PRIMARY KEY AUTO_INCREMENT,
+texto_ass VARCHAR(80),
+id_disciplina_fk INT,
+FOREIGN KEY (id_disciplina_fk) REFERENCES disciplina (id_disciplina)
+);
+
+CREATE TABLE questao(
+id_questao INT PRIMARY KEY AUTO_INCREMENT,
+enunciado VARCHAR(80),
+modalidae VARCHAR(80),
+nivel VARCHAR(80),
+id_assunto_fk INT,
+id_banca_fk INT,
+FOREIGN KEY (id_assunto_fk) REFERENCES assunto (id_assunto),
+FOREIGN KEY (id_banca_fk) REFERENCES banca (id_banca)
+);
+
+CREATE TABLE resposta(
+id_responde INT PRIMARY KEY AUTO_INCREMENT,
+data_res DATE,
+resultado VARCHAR(100),
+resultado_usu VARCHAR (100),
+id_usuario_fk INT,
+id_questao_fk INT,
+FOREIGN KEY (id_usuario_fk) REFERENCES usuario (id_usuario),
+FOREIGN KEY (id_questao_fk) REFERENCES questao (id_questao)
+);
+
+CREATE TABLE banca(
+id_banca INT PRIMARY KEY AUTO_INCREMENT,
+nome_ban VARCHAR(80),
+sigla_ban VARCHAR(80)
+);
+
+CREATE TABLE comentario(
+id_comenta INT PRIMARY KEY AUTO_INCREMENT,
+texto_com VARCHAR(80),
+data_com DATE
+);
+
+CREATE TABLE professor(
+id_professor INT PRIMARY KEY AUTO_INCREMENT,
+nome_prof VARCHAR(80),
+telefone_prof VARCHAR(80),
+email_prof VARCHAR (80)
+);
